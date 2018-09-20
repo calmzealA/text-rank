@@ -11,10 +11,10 @@ tr4w = TextRank4Keyword(stop_words_file = 'textrank4zh/stopwords.txt')
 tr4s.analyze(text=text, lower=True, source = 'all_filters')
 tr4w.analyze(text=text,lower=True, window=3, pagerank_config={'alpha':0.85})
 key = []
-print "关键词:"
+print ("关键词:")
 for item in tr4w.get_keywords(num=10, word_min_len=2):
     key.append(item.word)
-print " ".join(key)
+print (" ".join(key))
 
 def find_in_key(cuts):
     for i in key:
@@ -39,14 +39,14 @@ def jianhua(line):
         return line
 
 rows_num = tr4s.get_sentences_length()
-print "This text is %d rows" %rows_num
+print ("This text is %d rows" %rows_num)
 
 count_sentens = 0
-print "摘要:"
+print ("摘要:")
 for item in sorted(tr4s.get_key_sentences(num=rows_num/4),key = lambda x:x.index,reverse = False):
     if float(item.weight) >= 1.0/rows_num and count_sentens <= zhaiyao_num:
         count_sentens += 1
-        print jianhua(item.sentence) #type(item.sentence)
+        print (jianhua(item.sentence) #type(item.sentence))
     else:
         break
 
