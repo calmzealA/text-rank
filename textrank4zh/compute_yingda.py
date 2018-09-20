@@ -1,15 +1,20 @@
-#coding=utf-8
+#!/usr/bin/python3
+# -*- coding:utf8 -*-
+
 from __future__ import unicode_literals
+import codecs
 import gensim
 import logging
-import sys,os
+import sys, os
 import numpy
 import jieba
 import jieba.posseg as pseg
 
-reload(sys)
+import importlib
+importlib.reload(sys)
+# reload(sys)
+# sys.setdefaultencoding("utf-8")
 
-sys.setdefaultencoding("utf-8")
 #导入模型
 d = os.path.dirname(os.path.realpath(__file__))
 
@@ -22,7 +27,7 @@ def trim_str(pi_str=""):
     ss=""
     #pi_str=pi_str.encode("utf-8")
     for word in pi_str:
-        if word <> " ":
+        if word != " ":
             ss=ss+word
     return ss
 
@@ -30,7 +35,8 @@ def trim_str(pi_str=""):
 def chuli(pi) :
     question_words=jieba.cut(pi,cut_all=False) #进行分词
     pi=" ".join(question_words).split()
-    with open(os.path.join(d,"non_words.txt")) as readme:
+    # open("filename",'w',encoding="utf8")
+    with open(os.path.join(d,"non_words.txt"),encoding="utf8") as readme:
         for line in readme:
             non_words=line.split()
             for non_word in non_words:
@@ -137,7 +143,7 @@ def verbal_to_standard(question_source="",threshold=0.67):
     mm=0
     for i in range(0,len(ranks)):
         for j in range(0,len(ranks_chushi)):
-            if (ranks_chushi[j]==ranks[i]) and ((ranks[i]<>ranks[i-1] and i<>0) or i==0):
+            if (ranks_chushi[j]==ranks[i]) and ((ranks[i]!=ranks[i-1] and i!=0) or i==0):
                 xulie.insert(mm,j)
                 mm+=1
 
@@ -176,7 +182,7 @@ def standard_to_verbal(standard="",threshold=0.67):
     mm=0
     for i in range(0,len(ranks)):
         for j in range(0,len(ranks_chushi)):
-            if (ranks_chushi[j]==ranks[i]) and ((ranks[i]<>ranks[i-1] and i<>0) or i==0):
+            if (ranks_chushi[j]==ranks[i]) and ((ranks[i]!=ranks[i-1] and i!=0) or i==0):
                 xulie.insert(mm,j)
                 mm+=1
     
