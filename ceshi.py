@@ -46,7 +46,7 @@ print ("摘要:")
 for item in sorted(tr4s.get_key_sentences(num=rows_num/4),key = lambda x:x.index,reverse = False):
     if float(item.weight) >= 1.0/rows_num and count_sentens <= zhaiyao_num:
         count_sentens += 1
-        print (jianhua(item.sentence) #type(item.sentence))
+        print (jianhua(item.sentence)) #type(item.sentence))
     else:
         break
 
